@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Цветы - каталог товаров</title>
+  <style>
+
+body
+{
+	margin: 0;
+	padding: 0;
+	background: pink;
+}
+
+header
+{
+	background: #a9d4b6;
+	padding: 1em;
+	border: solid black 1px;
+}
+
+header h1
+{
+	margin: 0;
+	padding: 0;
+}
+
+.product-wrapper {
+	display: block;
+	width: 100%;
+}
+
+
+
+@media only screen and (min-width: 450px) {
+	.product-wrapper {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+
+	.product-wrapper {
+		width: 33.333%;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	.product-wrapper {
+		width: 25%;
+	}
+}
+
+.product p {
+	margin: 0;
+	font-size: 1em;
+	line-height: 1.4em;
+	height: 5.6em;
+	overflow: hidden;
+}
+
+.product {
+	display: block;
+	position: relative;
+	background: #a9d4b6;
+	margin: 1em;
+	text-decoration: none;
+	color: #474747;
+	z-index: 0;
+}
+
+.products {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.product-photo {
+	position: relative;
+	padding-bottom: 100%;
+	overflow: hidden;
+}
+
+.product-photo img {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+	transition: transform .4s ease-out;
+}
+
+.product:hover .product-photo img {
+	transform: scale(1.05);
+}
+
+.product-price-old{
+	color: #888;
+	text-decoration: line-through;
+	font-size: small;
+}
+.product-price-new{
+	color: #000;
+	font-size: x-large;
+}
+
+.product-preview-btn
+{
+	transition: translateY(2em);
+	opacity: 0;
+	position: absolute;
+	background: pink;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	bottom: 30px;
+	width: 40%;
+	border-radius: 25px;
+	height: 2.7em;
+}
+
+.product-card-btn, .product-pay-btn{
+	border-radius: 25px;
+	width: 50%;
+	height: 2.7em;
+}
+
+.product-card-btn
+{
+	background: green;
+}
+
+.product-pay-btn
+{
+	background: yellow;
+}
+
+.product:hover .product-preview-btn {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+
+
+.product-preview{
+	display: none;
+}
+
+.buttons > div
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	flex-wrap: wrap;
+}
+
+.products
+{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+	flex-direction: row;
+	/* padding-bottom: 100ex; */
+}
+
+
+header>div
+{
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#countProduct{
+	color: aliceblue;
+	background: red;
+	width: 2em;
+	height: 2em;
+	border-radius: 50%;
+	border: solid black 1px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo
+{
+	width: 4em;
+	height: 4em;
+}
+.cart
+{
+	width: 2em;
+	height: 2em;
+}
+
+
+header>div>div
+{
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.contacts
+{
+	width: 25%;
+}
+
+.contacts p,h3, h4
+{
+	margin: 0;
+}
+.contacts h3, h4
+{
+	margin: 0;
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+}
+
+footer
+{
+	padding: 1em;
+	background: #a9d4b6;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+	.product-preview-btn
+	{
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	footer
+	{
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		align-content: center;
+	}
+
+	.contacts
+	{
+		width: 100%;
+	}
+}
+
+</style>
+</head>
+<body>
+	<header>
+		<div>
+			<div><img src="img/logo.png" alt="logo" class="logo"><h1>Каталог товаров</h1></div>
+			<div><img src="img/cart.png" alt="cart" class="cart"><div id="countProduct">0</div></div>
+		</div>
+	</header>
+	<main>
+		<ul class="products clearfix">
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto1.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Ромашка желтая</h2>
+						<p>
+							Представитель семейства Астровых многолетников. Травянистое растение, имеющее высокий стебель, двуперистые листья насыщенного зеленого оттенка. 
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto2.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Подсолнух</h2>
+						<p>
+							Однолетнее растение с прямостоячим, грубым, покрытым жесткими волосками стеблем высотой от 0,6 до 2,5 м и мощной корневой системой, проникающей в почву 
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto3.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Тюльпан желтый</h2>
+						<p>
+							Многолетнее травянистое луковичное растение, принадлежащее к семейству Лилейные. Его высота может составлять 10-100 см.  
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto4.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Ромашка желтая</h2>
+						<p>
+							Информация о каком то цвете. Какеи-то буквы. Просто для объема.
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto5.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Ирис садовый</h2>
+						<p>
+							Декоративное, многолетнее растение, принадлежащее семейству Касатиковые. Считается, что первые цветы пришли к нам из Азии. 
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto6.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Мак</h2>
+						<p>
+							Многолетнее травянистое растение. Образует плотные куртины. Стебли прямые, высотой 10-15 см.
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto7.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Роза1</h2>
+						<p>
+							Листопадный кустарник. Относится к семейству розовых.Старые ветки и молодые побеги покрыты колючками.Высота кустарника колеблется от 1 до 5 метров.
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto8.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Роза2</h2>
+						<p>
+							Листопадный кустарник. Относится к семейству розовых.Старые ветки и молодые побеги покрыты колючками.Высота кустарника колеблется от 1 до 5 метров.
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto9.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Роза3</h2>
+						<p>
+							Листопадный кустарник. Относится к семейству розовых.Старые ветки и молодые побеги покрыты колючками.Высота кустарника колеблется от 1 до 5 метров.
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li class="product-wrapper">
+				<a href="" class="product">
+					<div class="product-photo">
+						<img src="img/foto10.jpg" alt="">
+						<button type="button" class="product-preview-btn">Быстный просмотр</button>
+					</div>
+					<div class="product-preview">
+						<h2>Роза4</h2>
+						<p>
+							Листопадный кустарник. Относится к семейству розовых.Старые ветки и молодые побеги покрыты колючками.Высота кустарника колеблется от 1 до 5 метров.
+						</p>
+						<div class="has">
+							В наличии
+						</div>
+						<div class="product-price">
+							<span class="product-price-old">450 руб</span><span class="product-price-new">460 руб</span>
+						</div>
+						<div class="buttons">
+							<div>
+								<button type="button" class="product-card-btn">В корзину</button>
+							</div>
+							<div>
+								<button type="button" class="product-pay-btn">Купить в один клик</button>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</main>
+
+
+	
+	<footer>
+		<div class="contacts">
+			<h3>Контакты</h3>
+			<h4>Адрес:</h4>
+			<p>109377, Россия, г. Москва, ул. Академика Скрябина 9, корп. 2, стр. 4 Мы находимся в здании учебного центра</p>
+			<h4>Телефон:</h4>
+			<a href="tel:8(495)2605289">8 (495) 260-52-89</a> 
+			<h4>E-mail:</h4> 
+			<a href="mailto:eduprof@social.mos.ru">eduprof@social.mos.ru</a>
+			<h4>График работы:</h4>
+			<p>Понедельник - четверг:</p>
+			<p>с 9-00 по 17-45</p>
+			<p>Пятница:</p>
+			<p> с 9-00 по 16-30</p>
+		</div>
+		<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Acf1191777b036715290811e04ac0a1ea76cb59ee52278472ad4a52fc10601af7&amp;height=500&amp;lang=ru_RU&amp;scroll=false"></script>
+	</footer>
+	<script>
+		let countProduct = document.getElementById("countProduct");
+		function addCard(event)
+		{
+			countProduct.innerHTML = parseInt(countProduct.innerHTML)+1;
+			return false;
+		}
+
+		function click(event)
+		{
+			let target = event.target;
+			let product = target.closest(".product");
+			let preview = product.querySelector(".product-preview");
+
+			if(preview.style.display == "block")
+			{
+				target.innerHTML = "Быстрый просмотр";
+				preview.style.display = "none";
+			}
+			else
+			{
+				target.innerHTML = "Скрыть";
+				preview.style.display = "block";
+			}
+
+			return false;
+		}
+		
+		let btns = document.querySelectorAll(".product-preview-btn");
+		let btnsCard = document.querySelectorAll(".product-card-btn");
+		
+
+		btns.forEach(function(item){
+			item.onclick = click;
+		});
+
+		btnsCard.forEach(function(item){
+			item.onclick = addCard;
+		});
+		
+	</script>
+</body>
+</html>
